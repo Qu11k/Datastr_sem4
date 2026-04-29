@@ -84,4 +84,12 @@ private int findVertice(Ttype element) throws Exception {
 	}
 	throw new Exception("Mekleta virsotne nav atrasta");
 }
+public void print() throws Exception {
+	if(isEmpty()) {
+		throw new Exception("grafs ir tukss un to nevar izprintet");
+	}
+	for (int i =0;i<howManyElements;i++) {
+		System.out.println(vertices[i].toString());
+	}
+}
 }
