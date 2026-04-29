@@ -35,4 +35,53 @@ private void resize() {
 	vertices=newVertices;
 	System.gc();
 }
+public void addVertice(Ttype element) throws Exception {
+	if (element == null) {
+		throw new Exception("elements nevar but bez references");
+	}
+	for (int i = 0; i<howManyElements;i++) {
+		if(vertices[i].getElement().equals(element)) {
+			throw new Exception("tads elements eksiste to nevar pievienot atkartoti");
+		}
+	}
+	if (isFull()) {
+		resize();
+	}
+	MyVerticeNode newVerticeNode= new MyVerticeNode<Ttype>(element);
+	vertices[howManyElements]=newVerticeNode;
+	howManyElements++;
+}
+public void addEdge(Ttype elementFrom,Ttype elementTo, int weight) throws Exception {
+	//ienakosie mainigie
+	if (elementFrom==null || elementTo==null||weight<=0){
+		throw new Exception("Kads no ievades parametriem nav pareizs");
+	}
+	int indexOfElementFrom=findVertice(elementFrom);
+	int indexOfElementTo=findVertice(elementTo);
+	MyEdgeNode newEdge= new MyEdgeNode(indexOfElementTo, weight);
+	MyVerticeNode verticeNodeFrom = vertices[indexOfElementFrom];
+	if(verticeNodeFrom.getFirstEdgeNode()==null) {
+		verticeNodeFrom.setFirstEdgeNode(newEdge);
+	}
+	else {
+		MyEdgeNode currentNode = verticeNodeFrom.getFirstEdgeNode();
+		while(currentNode.getNextEdgeNode()!= null) {
+			currentNode.setNextEdgeNode(newEdge);
+		}
+	}
+	//parbaudit vai abi elementi ir izveidoti
+	//izveidot myedgenode objektu
+	
+}
+private int findVertice(Ttype element) throws Exception {
+	if(element==null) {
+		throw new Exception("elements bez references");
+	}
+	for(int i=0; i<howManyElements;i++) {
+		if(vertices[i].getElement().equals(element)) {
+			return i;
+		}
+	}
+	throw new Exception("Mekleta virsotne nav atrasta");
+}
 }
