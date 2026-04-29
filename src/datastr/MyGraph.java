@@ -90,6 +90,13 @@ public void print() throws Exception {
 	}
 	for (int i =0;i<howManyElements;i++) {
 		System.out.println(vertices[i].toString());
+		MyEdgeNode currentNode=vertices[i].getFirstEdgeNode();
+		while (currentNode!=null) {
+			int indexVerticleTo = currentNode.getIndexOfVerticeTO();
+			System.out.println("-->"+vertices[indexVerticleTo].getElement()+", distance: "+currentNode.getWeight()+"km ---");
+			currentNode = currentNode.getNextEdgeNode();
+		}
+		System.out.println();
 	}
 }
 }
